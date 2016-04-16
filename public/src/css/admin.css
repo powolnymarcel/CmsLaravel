@@ -1,0 +1,4 @@
+.has-error{
+    border-color: red !important;
+    outline-color: red !important
+}

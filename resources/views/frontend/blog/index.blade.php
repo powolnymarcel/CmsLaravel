@@ -6,18 +6,39 @@
 @section('contenu')
     <div class="row">
         <div class="col-md-12">
-
-            <article>
-                <h3>Titre</h3>
-                <span>Sous titre</span>
-                <span>Auteur</span>
-                <p>Description</p>
-                <a href="#">Lire plus</a>
-            </article>
-
+            <div class="container">
+                @include('includes.info-box')
+            </div>
+        <ul>
+            @if(count($posts) ==0)
+                <li>Pas de post</li>
+                @else
+                    @foreach($posts as $post)
+                        <li>
+                            <article>
+                                <div>
+                                    <h3>{{$post->titre}}</h3>
+                                    <p>{{$post->texte}}
+                                    </p>
+                                    <span>{{$post->auteur}} </span>
+                                    <span>{{$post->created_at}}</span>
+                                    <a href="{{route('blog.single',['post_id'=>$post->id,'end'=>'frontend'])}}">Lire plus</a>
+                                </div>
+                            </article>
+                        </li>
+                    @endforeach
+             @endif
             <section>
-                Pagination
+                @if($posts->lastPage()>1)
+                    @if($posts->currentPage() !==1)
+                        <span class="glyphicon glyphicon-chevron-left"></span>
+                    @endif
+                        @if($posts->currentPage() !=$posts->lastPage())
+                            <span class="glyphicon glyphicon-chevron-right"></span>
+                        @endif
+                @endif
             </section>
+        </ul>
         </div>
     </div>
 

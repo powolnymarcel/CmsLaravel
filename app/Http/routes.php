@@ -20,7 +20,7 @@ Route::get('/blog',[
     'uses'=>'PostController@getBlogIndex',
     'as'=>"blog.index"
 ]);
-Route::get('/blog/{post_id}',[
+Route::get('/blog/{post_id}&{end}',[
     'uses'=>'PostController@getSinglePost',
     'as'=>"blog.single"
 ]);
@@ -35,3 +35,49 @@ Route::get('/contact',[
     'uses'=>'ContactMessageController@getContactIndex',
     'as'=>"contact"
 ]);
+
+
+Route::group([
+    'prefix'=>'/admin'
+],function(){
+    Route::get('/',[
+        'uses'=>'AdminController@getIndex',
+        'as'=>"admin.index"
+    ]);
+
+    Route::get('/blog/posts/creation',[
+        'uses'=>'PostController@getCreationPost',
+        'as'=>"admin.blog.creation_post"
+    ]);
+
+    Route::get('/blog/posts',[
+        'uses'=>'PostController@getPostIndex',
+        'as'=>"admin.blog.index"
+    ]);
+
+    Route::get('/blog/post/{post_id}&{end}',[
+        'uses'=>'PostController@getSinglePost',
+        'as'=>"admin.blog.post"
+    ]);
+
+
+    Route::post('/blog/post/creation',[
+        'uses'=>'PostController@postCreationPost',
+        'as'=>"admin.blog.post.creation"
+    ]);
+
+    Route::get('/blog/post/{post_id}/edit',[
+        'uses'=>'PostController@getUpdatePost',
+        'as'=>"admin.blog.post.edit"
+    ]);
+
+    Route::get('/blog/post/update',[
+        'uses'=>'PostController@postUpdatePost',
+        'as'=>"admin.blog.post.update"
+    ]);
+    
+    
+    
+    
+    
+});

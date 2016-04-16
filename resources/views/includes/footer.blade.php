@@ -6,5 +6,5 @@
                 <li><a href="">A propox</a></li>
             </ul>
         </nav>
-    </div>
+</div>
 </footer>

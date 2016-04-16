@@ -1,7 +1,4 @@
-@extends('layout.principal')
-@section('title')
-    {{$post->titre}}
-@endsection
+@extends('layout.admin-master')
 
 
 @section('contenu')
@@ -11,7 +8,12 @@
     </div>
 
     <div class="row">
-
+        <nav>
+            <ul class="list-unstyled">
+                <li>Editer</li>
+                <li>Supprimer</li>
+            </ul>
+        </nav>
         <article>
             <h2>{{$post->titre}}</h2>
             <small>{{$post->auteur}} - {{$post->created_at}}</small>

@@ -1,3 +1,4 @@
+<div class="container">
     <nav class="navbar navbar-default" role="navigation">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
@@ -5,16 +6,19 @@
                 <span class="sr-only">Toggle navigation</span> <span class="icon-bar"></span><span
                         class="icon-bar"></span><span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="http://localhost/quoteAppLaravel/public/">LeBlog</a>
+            <a class="navbar-brand" href="http://localhost/CmsLaravel/public/">CMS</a>
         </div>
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
             <ul class="nav navbar-nav  text-center">
-                <li><a href="{{route('blog.index')}}">Blog</a></li>
-                <li><a href="{{route('a-propos')}}">A propos</a></li>
-                <li><a href="{{route('contact')}}">Contact</a></li>
+                <li><a href="{{route('admin.index')}}">Dashboard</a></li>
+                <li><a href="{{route('admin.blog.index')}}">Posts</a></li>
+                <li><a href="{{route('contact')}}">Categories</a></li>
+                <li><a href="{{route('contact')}}">Messages</a></li>
+                <li><a href="{{route('contact')}}">Logout</a></li>
             </ul>
         </div>
         <!-- /.navbar-collapse -->
     </nav>
+</div>
