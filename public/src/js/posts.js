@@ -24,7 +24,7 @@ var tid = setInterval(function () {
 
 function addCategoryToPost(event) {
     event.preventDefault();
-    var select = document.getElementById('category_select');
+    var select = document.getElementById('categorie_select');
     var selectedCategoryID = select.options[select.selectedIndex].value;
     var selectedCategoryName = select.options[select.selectedIndex].text;
     if (parseCategories().indexOf(selectedCategoryID) != -1) {
