@@ -21,15 +21,20 @@
         <div class="form-group">
             <label for="categorie_select">Ajout categorie</label>
             <select name="select" id="select" class="form-control" >
-                <!--FOREACH LOOP TO OUTPUT CATEGORI-->
-                <option value="">Dummy</option>
+                @foreach($categories as $category)
+                    <option value="{{ $category->id }}">{{ $category->nom }}</option>
+                @endforeach
             </select>
         </div>
         <button type="button">Ajouter</button>
         <div class="categorie-ajoutee">
-            <ul></ul>
+            <ul>
+                @foreach($post_categories as $post_category)
+                    <li><a href="#" id="{{ $post_category->id }}">{{ $post_category->nom }}</a></li>
+                @endforeach
+            </ul>
         </div>
-        <input type="hidden" name="categories" id="categories">
+        <input type="hidden" name="categories" id="categories" value="{{ implode(',', $post_categories_ids) }}">
 
         <div class="form-group">
             <label for="texte">Texte</label>

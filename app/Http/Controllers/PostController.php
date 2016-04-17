@@ -42,8 +42,9 @@ public function getBlogIndex()
     }
 
     public function getCreationPost()
-    {
-        return view('admin.blog.creation_post');
+    {        $categories=Categories::all();
+
+        return view('admin.blog.creation_post',['categories'=>$categories]);
 
     }
     public function postCreationPost(Request $request)
@@ -65,11 +66,20 @@ public function getBlogIndex()
 
     public function getUpdatePost($post_id){
         $post=Post::find($post_id);
+        $categories=Categories::all();
+        $post_categories=$post->categories;
+        $post_categories_ids=array();
+
+        $i=0;
+        foreach ($post_categories as $post_categorie){
+            $post_categories_ids[$i]=$post_categorie->id;
+            $i++;
+        }
         if(!$post){
             return redirect()->back('blog.index')->with(['fail'=>"Post non trouvé"]);
         }
         //Trouver les categories
-        return view('admin.blog.editer-post',['post'=>$post]);
+        return view('admin.blog.editer-post',['post'=>$post,'categories'=>$categories,'$post_categories'=>$post_categories,'post_categories_ids'=>$post_categories_ids]);
 
     }
 
