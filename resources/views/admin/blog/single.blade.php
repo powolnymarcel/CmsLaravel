@@ -10,8 +10,8 @@
     <div class="row">
         <nav>
             <ul class="list-unstyled">
-                <li>Editer</li>
-                <li>Supprimer</li>
+                <li><a href="{{route('admin.blog.post.editer',['post_id'=>$post->id])}}">Editer</a></li>
+                <li><a href="{{route('admin.blog.post.delete',['post_id'=>$post->id])}}">Supprimer</a></li>
             </ul>
         </nav>
         <article>

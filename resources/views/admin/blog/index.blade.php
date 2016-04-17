@@ -20,6 +20,7 @@
                     </nav>
                 </header>
                 <section>
+                    <p>Nombre total de post : {{$nombreDePost}}</p>
                     <ul>
                         @if(count($posts) ==0)
                                 <!-- SI pas de post -->
@@ -37,8 +38,8 @@
                                             <div class="edit">
                                                 <ul class="list-unstyled">
                                                     <li><a href="{{route('admin.blog.post',['post_id'=>$post->id,'end'=>'admin'])}}">Voir le post</a></li>
-                                                    <li><a href="">Editer</a></li>
-                                                    <li><a href="">Supprimer</a></li>
+                                                    <li><a href="{{route('admin.blog.post.editer',['post_id'=>$post->id])}}">Editer</a></li>
+                                                    <li><a href="{{route('admin.blog.post.delete',['post_id'=>$post->id])}}">Supprimer</a></li>
                                                 </ul>
                                             </div>
                                         </div>

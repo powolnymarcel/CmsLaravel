@@ -2,3 +2,13 @@
     border-color: red !important;
     outline-color: red !important
 }
+.active{
+    background-color: gold;
+    color:red
+}
+.active a{
+    color:red   !important;
+}
+.categorie-edit{
+    display: none;
+}

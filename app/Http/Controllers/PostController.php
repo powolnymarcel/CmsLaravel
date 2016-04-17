@@ -10,11 +10,14 @@ use App\Categories;
 
 class PostController extends Controller
 {
+    
 
     public function getPostIndex()
     {
         $posts= Post::orderBy('created_at','desc')->paginate(5);
-        return view('admin.blog.index',['posts'=>$posts]);
+        $nombreDePost=Post::all();
+        $nombreDePost=count($nombreDePost);
+        return view('admin.blog.index',['posts'=>$posts,'nombreDePost'=>$nombreDePost]);
 
         }
 
@@ -85,10 +88,20 @@ public function getBlogIndex()
 
         //Categories to do
 
+        return redirect()->route('admin.index')->with(['success'=>"Post mis a jour"]);
     }
 
+    public function getDeletePost($post_id){
 
-private function texteCourt($texte,$taille){
+        $post=Post::find($post_id);
+        if(!$post){
+            return redirect()->back('blog.index')->with(['fail'=>"Post non trouvé"]);
+        }
+        $post->delete();
+        return redirect()->route('admin.index')->with(['success'=>"Post supprimé"]);
+    }
+
+    private function texteCourt($texte,$taille){
     if (str_word_count($texte,0)>$taille){
         $mots= str_word_count($texte,2);
         $pos=array_keys($mots);

@@ -12,10 +12,10 @@
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
 
             <ul class="nav navbar-nav  text-center">
-                <li><a href="{{route('admin.index')}}">Dashboard</a></li>
-                <li><a href="{{route('admin.blog.index')}}">Posts</a></li>
-                <li><a href="{{route('contact')}}">Categories</a></li>
-                <li><a href="{{route('contact')}}">Messages</a></li>
+                <li {{Request::is('admin') ? 'class=active': ''}}><a href="{{route('admin.index')}}">Dashboard</a></li>
+                <li {{Request::is('admin/blog/post*') ? 'class=active': ''}}><a href="{{route('admin.blog.index')}}">Posts</a></li>
+                <li {{Request::is('admin/blog/categories*') || Request::is('admin/blog/categorie*') ? 'class=active': ''}}><a href="{{route('admin.blog.categories')}}">Categories</a></li>
+                <li {{Request::is('admin/contact*') ? 'class=active': ''}}><a href="{{route('contact')}}">Messages</a></li>
                 <li><a href="{{route('contact')}}">Logout</a></li>
             </ul>
         </div>

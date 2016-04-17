@@ -60,6 +60,12 @@ Route::group([
         'as'=>"admin.blog.post"
     ]);
 
+    Route::get('/blog/categories',[
+        'uses'=>'CategorieController@getCategorieIndex',
+        'as'=>"admin.blog.categories"
+    ]);
+
+
 
     Route::post('/blog/post/creation',[
         'uses'=>'PostController@postCreationPost',
@@ -68,16 +74,28 @@ Route::group([
 
     Route::get('/blog/post/{post_id}/edit',[
         'uses'=>'PostController@getUpdatePost',
-        'as'=>"admin.blog.post.edit"
+        'as'=>"admin.blog.post.editer"
     ]);
 
-    Route::get('/blog/post/update',[
+    Route::post('/blog/post/update',[
         'uses'=>'PostController@postUpdatePost',
         'as'=>"admin.blog.post.update"
     ]);
-    
-    
-    
+
+    Route::post('/blog/categories/update',[
+        'uses'=>'PostController@postUpdateCategorie',
+        'as'=>"admin.blog.categorie.update"
+    ]);
+
+    Route::post('/blog/categorie/creation',[
+        'uses'=>'CategorieController@postCreationCategorie',
+        'as'=>"admin.blog.categorie.creation"
+    ]);
+
+    Route::get('/blog/post/{post_id}/delete',[
+        'uses'=>'PostController@getDeletePost',
+        'as'=>"admin.blog.post.delete"
+    ]);
     
     
 });
