@@ -65,22 +65,16 @@ public function getBlogIndex()
 
 
     public function getUpdatePost($post_id){
-        $post=Post::find($post_id);
-        $categories=Categories::all();
-        $post_categories=$post->categories;
-        $post_categories_ids=array();
-
-        $i=0;
-        foreach ($post_categories as $post_categorie){
-            $post_categories_ids[$i]=$post_categorie->id;
+        $post = $this->retrievePostOrFail($post_id);
+        $categories = Categories::all();
+        $post_categories = $post->categories;
+        $post_categories_ids = array();
+        $i = 0;
+        foreach ($post_categories as $post_category) {
+            $post_categories_ids[$i] = $post_category->id;
             $i++;
         }
-        if(!$post){
-            return redirect()->back('blog.index')->with(['fail'=>"Post non trouvé"]);
-        }
-        //Trouver les categories
-        return view('admin.blog.editer-post',['post'=>$post,'categories'=>$categories,'$post_categories'=>$post_categories,'post_categories_ids'=>$post_categories_ids]);
-
+        return view('admin.blog.editer-post', ['post' => $post, 'categories' => $categories, 'post_categories' => $post_categories, 'post_categories_ids' => $post_categories_ids]);
     }
 
     public function postUpdatePost(Request $request){
@@ -122,7 +116,18 @@ public function getBlogIndex()
 
 
 
-
+    private function retrievePostOrFail($post_id)
+    {
+        $post = Post::find($post_id);
+        if (!$post) {
+            return redirect()->route('admin.index')->with(['fail' => 'Post not found']);
+        }
+        return $post;
+    }
+    private function parseCategories($categories_string)
+    {
+        return explode(',',$categories_string);
+    }
 
 
 

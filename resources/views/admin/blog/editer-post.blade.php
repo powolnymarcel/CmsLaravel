@@ -20,13 +20,13 @@
         </div>
         <div class="form-group">
             <label for="categorie_select">Ajout categorie</label>
-            <select name="select" id="select" class="form-control" >
+            <select name="categorie_select" id="categorie_select" class="form-control" >
                 @foreach($categories as $category)
                     <option value="{{ $category->id }}">{{ $category->nom }}</option>
                 @endforeach
             </select>
         </div>
-        <button type="button">Ajouter</button>
+        <button type="button" class="btn">Ajouter</button>
         <div class="categorie-ajoutee">
             <ul>
                 @foreach($post_categories as $post_category)
@@ -52,5 +52,5 @@
 
 
 @section('scripts')
-    <script src="{{URL::secure('src/js/posts.js')}}"></script>
+    <script src="{{URL::to('src/js/posts.js')}}"></script>
 @endsection
