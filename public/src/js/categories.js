@@ -13,6 +13,7 @@ var docReady= setInterval(function(){
 var editSection = document.getElementsByClassName('edit');
     for(var i=0;i<editSection.length;i++){
         editSection[i].firstElementChild.firstElementChild.children[1].firstChild.addEventListener('click',startEdit)
+        editSection[i].firstElementChild.firstElementChild.children[2].firstChild.addEventListener('click',startDelete)
     }
 
     //On écoute le bouton pour envoyer les data en ajax
@@ -65,10 +66,11 @@ var nomCategorie = li.children[0].value;
         alert('veuillez indiquer un nom !')
         return;
     }
-    ajax('POST',"/admin/blog/categories/update",'nom=' +nomCategorie+"categorieID="+categorieID,endEdit,[e])
+    ajax('POST',"/admin/blog/categories/update",'&nom=' +nomCategorie+"&categorieID="+categorieID,endEdit,[e])
 }
 function endEdit(parametres,success,responseObj){
-var event = parametres[0];
+    console.log(responseObj)
+var e = parametres[0];
     if(success){
         var nouveauNom = responseObj.nouveau_nom;
 var article = e.path[5];
@@ -79,7 +81,7 @@ var article = e.path[5];
         article.firstElementChild.firstElementChild.innerHTML= nouveauNom;
     }
     e.target.innerText = "Editer";
-    var li = event.path[2].children[0];
+    var li = e.path[2].children[0];
     li.children[0].style.maxWidth="0px";
     setTimeout(function(){
         li.style.display="none";
@@ -87,6 +89,33 @@ var article = e.path[5];
     e.target.removeEventListener('click',saveEdit);
     e.target.addEventListener('click',startEdit);
 }
+function startDelete(e) {
+   deleteCategorie(e);
+}
+function deleteCategorie(e) {
+    e.preventDefault();
+e.target.removeEventListener('click',startDelete);
+    var categorieID=e.path[4].previousElementSibling.dataset['id'];
+
+ajax('GET','/admin/blog/categorie/'+categorieID+'/delete',null,categorieDeleted,[event.path[5]])
+}
+
+function categorieDeleted(parametres,success,responsseObj) {
+var article =parametres[0];
+    if(success){
+        article.style.backgroundColor="#ffc4be";
+        setTimeout(function(){
+           article.remove();
+            //Si pagination , il serait bien que l'element de la page suivante vienne s'integrer dans la page actuvelle...
+            location.reload();
+
+        },300)
+    }
+}
+
+
+
+
 
 function ajax(methode,url,parametres,callback,callbackParams){
     var http;

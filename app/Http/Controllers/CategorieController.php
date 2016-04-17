@@ -39,12 +39,19 @@ class CategorieController extends Controller
             'nom'=>'required|unique:categories'
         ]);
 
-        $categorie=Categories::find($request['categorie_id']);
+        $categorie=Categories::find($request['categorieID']);
         if (!$categorie){
             return Response::json(['message'=>"Categorie non trouvee",404]            );
         }
         $categorie->nom=$request['nom'];
         $categorie->update();
-        return Response::json(['message'=>'Catetgorie mise à jour'],200);
+        return Response::json(['message'=>'Catetgorie mise à jour','nouveau_nom'=>$request['nom']],200);
+    }
+
+
+    public function getDeleteCategorie($categorie_id){
+        $categorie=Categories::find($categorie_id);
+        $categorie->delete();
+        return Response::json(['message'=>'categorie supprimee']);
     }
 }

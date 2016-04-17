@@ -83,7 +83,7 @@ Route::group([
     ]);
 
     Route::post('/blog/categories/update',[
-        'uses'=>'PostController@postUpdateCategorie',
+        'uses'=>'CategorieController@postUpdateCategorie',
         'as'=>"admin.blog.categorie.update"
     ]);
 
@@ -96,6 +96,13 @@ Route::group([
         'uses'=>'PostController@getDeletePost',
         'as'=>"admin.blog.post.delete"
     ]);
-    
-    
+
+    Route::get('/blog/categorie/{categorie_id}/delete',[
+        'uses'=>'CategorieController@getDeleteCategorie',
+        'as'=>"admin.blog.categorie.delete"
+    ]);
+
+
+
+
 });
